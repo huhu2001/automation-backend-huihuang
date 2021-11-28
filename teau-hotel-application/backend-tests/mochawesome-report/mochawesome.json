@@ -1,0 +1,176 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-11-27T21:56:51.856Z",
+    "end": "2021-11-27T21:56:54.963Z",
+    "duration": 3107,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "21ec56d7-768f-446f-896b-a169c6e835f1",
+      "title": "",
+      "fullFile": "cypress/integration/backend-auth.spec.js",
+      "file": "cypress/integration/backend-auth.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+          "title": "testing rooms",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1: show all rooms",
+              "fullTitle": "testing rooms TC1: show all rooms",
+              "timedOut": null,
+              "duration": 725,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.authenticateSession().then(Response => {\n  cy.request({\n    method: \"GET\",\n    url: \"http://localhost:3000/api/rooms\",\n    headers: {\n      'X-User-Auth': JSON.stringify(Cypress.env().loginToken),\n      'Content-Type': 'application/json'\n    }\n  }).then(Response => {\n    cy.log(Response.body);\n  });\n});",
+              "err": {},
+              "uuid": "34ea7d11-49df-44eb-a3e3-d324684085fd",
+              "parentUUID": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC2: create one new room",
+              "fullTitle": "testing rooms TC2: create one new room",
+              "timedOut": null,
+              "duration": 626,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.authenticateSession().then(Response => {\n  let fakeRandomPayload = roomHelpers.createRandomRoomPayload();\n  cy.request({\n    method: \"POST\",\n    url: \"http://localhost:3000/api/room/new\",\n    headers: {\n      'X-User-Auth': JSON.stringify(Cypress.env().loginToken),\n      'Content-Type': 'application/json'\n    },\n    body: fakeRandomPayload\n  }).then(Response => {\n    cy.log(Response.body.id);\n    cy.log(Response.body.created);\n    cy.log(Response.body.length);\n    roomId = Response.body.id;\n    resBody = Response.body;\n  });\n});",
+              "err": {},
+              "uuid": "0cd4a0be-4796-463f-b525-646c12b0aa4c",
+              "parentUUID": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC3: update the room",
+              "fullTitle": "testing rooms TC3: update the room",
+              "timedOut": null,
+              "duration": 578,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.authenticateSession().then(Response => {\n  // let fakelastRoomPayload = roomHelpers.updateRandomRoomPayload()\n  // let lastId = Response.body[Response.body.length1].id\n  cy.request({\n    method: \"PUT\",\n    url: \"http://localhost:3000/api/room/\" + roomId,\n    headers: {\n      'X-User-Auth': JSON.stringify(Cypress.env().loginToken),\n      'Content-Type': 'application/json'\n    },\n    body: {\n      \"category\": resBody.category,\n      \"floor\": resBody.floor,\n      \"id\": roomId,\n      \"number\": resBody.number + 1,\n      \"available\": resBody.available,\n      \"price\": resBody.price,\n      \"features\": resBody.features\n    }\n  }).then(Response => {\n    cy.log(Response.body);\n  });\n});",
+              "err": {},
+              "uuid": "7b47598d-269a-48fd-b0e4-f3bcb2100de3",
+              "parentUUID": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC4: delete en room",
+              "fullTitle": "testing rooms TC4: delete en room",
+              "timedOut": null,
+              "duration": 578,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.authenticateSession().then(Response => {\n  cy.request({\n    method: \"DELETE\",\n    url: 'http://localhost:3000/api/room/' + roomId,\n    headers: {\n      'X-User-Auth': JSON.stringify(Cypress.env().loginToken),\n      'Content-Type': 'application/json'\n    }\n  }).then(Response => {\n    const responseAsString = JSON.stringify(Response);\n    cy.log(responseAsString);\n  });\n});",
+              "err": {},
+              "uuid": "8299cb31-3088-4f13-b954-640111145d59",
+              "parentUUID": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " TC5:  delete all rooms",
+              "fullTitle": "testing rooms  TC5:  delete all rooms",
+              "timedOut": null,
+              "duration": 551,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.authenticateSession().then(Response => {\n  for (var i = 1; i <= roomNum; i++) {\n    cy.request({\n      method: \"DELETE\",\n      url: \"http://localhost:3000/api/room/\" + i,\n      headers: {\n        'X-User-Auth': JSON.stringify(Cypress.env().loginToken),\n        'Content-Type': 'application/json'\n      }\n    }).then(Response => {\n      cy.log(Response.body);\n    });\n  }\n});",
+              "err": {},
+              "uuid": "03124bb4-880e-4e90-b7ee-2cdd87023096",
+              "parentUUID": "b378ffdd-e01b-4da7-8915-2737538d25a7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "34ea7d11-49df-44eb-a3e3-d324684085fd",
+            "0cd4a0be-4796-463f-b525-646c12b0aa4c",
+            "7b47598d-269a-48fd-b0e4-f3bcb2100de3",
+            "8299cb31-3088-4f13-b954-640111145d59",
+            "03124bb4-880e-4e90-b7ee-2cdd87023096"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3058,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.0.1"
+    }
+  }
+}
